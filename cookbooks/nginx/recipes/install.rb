@@ -1,8 +1,5 @@
 include_recipe 'base-config::setlocale'
-
-package 'epel-release' do
-  action :install
-end
+include_recipe 'base-pkg::install'
 
 package 'nginx' do
   action :install
