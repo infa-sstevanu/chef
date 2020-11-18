@@ -3,14 +3,24 @@
 # The InSpec reference, with examples and extensive documentation, can be
 # found at https://docs.chef.io/inspec/resources/
 
-unless os.windows?
-  # This is an example test, replace with your own test.
-  describe user('root'), :skip do
-    it { should exist }
-  end
+describe package('nginx') do
+  it { should be_installed }
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+describe port(80) do
+  it { should be_listening }
+end
+
+describe file('/etc/nginx/conf.d/virtual_host.conf') do
+  it { should exist }
+end
+
+describe http('http://127.0.0.1') do
+  its('status') { should cmp 200 }
+end
+
+describe http('http://127.0.0.1',
+              method: 'GET',
+              headers: {'Host' => 'some.domain.local'}) do
+  its('status') { should cmp 502 }
 end
