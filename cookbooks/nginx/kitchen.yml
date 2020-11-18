@@ -24,7 +24,7 @@ platforms:
   - name: centos-7
 
 suites:
-  - name: default
+  - name: nginx
     verifier:
       inspec_tests:
         - test/integration/default
