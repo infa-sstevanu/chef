@@ -2,3 +2,4 @@ source 'https://supermarket.chef.io'
 
 metadata
 cookbook 'base-config', path: '../base-config'
+cookbook 'base-pkg', path: '../base-pkg'
