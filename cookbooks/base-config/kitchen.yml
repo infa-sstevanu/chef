@@ -25,7 +25,7 @@ platforms:
   - name: centos-8
 
 suites:
-  - name: default
+  - name: base-config
     verifier:
       inspec_tests:
         - test/integration/default
