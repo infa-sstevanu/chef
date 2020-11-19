@@ -30,4 +30,4 @@ suites:
         - test/integration/default
     attributes: {}
     run_list:
-      - recipe[patches::install]
+      - recipe[patches::patch]
