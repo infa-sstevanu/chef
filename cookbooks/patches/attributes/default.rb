@@ -1,1 +1,1 @@
-normal["qualys"]["severity_level"] = 3
+default["qualys"]["severity_level"] = 3
