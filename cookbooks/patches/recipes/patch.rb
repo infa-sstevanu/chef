@@ -19,10 +19,6 @@ detections.each do |detection|
 end
 
 vulnerable_packages.each do |pkg|
-  # package pkg do
-  #   action :install
-  # end
-  #log pkg
   pkg_name = pkg[0]
   pkg_version = pkg[2]
 
