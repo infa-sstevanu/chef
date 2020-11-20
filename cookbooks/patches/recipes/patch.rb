@@ -1,5 +1,7 @@
-include_recipe 'base-config::setlocale'
-include_recipe 'base-pkg::install'
+# include_recipe 'base-config::setlocale'
+# include_recipe 'base-pkg::install'
+
+vulnerable_packages = []
 
 node_hash = node.normal.to_hash
 
@@ -13,8 +15,14 @@ detections.each do |detection|
     packages.each do |pkgs|
       unless pkgs.include?("Installed")
         pkg = pkgs.split(" ").select { |p| p.length>0 }
-        log "Update package #{pkg[0]} to version #{pkg[2]}"
+        vulnerable_packages.push("#{pkg[0]}-#{pkg[2]}")
       end
     end
+  end
+end
+
+vulnerable_packages.each do |pkg|
+  package pkg do
+    action :install
   end
 end
