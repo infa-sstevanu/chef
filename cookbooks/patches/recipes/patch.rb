@@ -42,13 +42,13 @@ vulnerable_packages.each do |pkg|
     pkg_name = pkg[0]
     pkg_version = pkg[2]
     
-    #yum_package pkg_name do
-    #  flush_cache [:before]
-    #  package_name pkg_name
-    #  version pkg_version
-    #  action :install
-    #end
     log(pkg)
+    yum_package pkg_name do
+      flush_cache [:before]
+      package_name pkg_name
+      version pkg_version
+      action :install
+    end
   rescue
   end
 end
