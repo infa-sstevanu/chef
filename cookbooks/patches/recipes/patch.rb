@@ -35,19 +35,25 @@ end
 
 # Update the packages
 $vulnerable_packages.each do |pkg|
+  pkg_name = pkg[0]
+  pkg_required_version = pkg[1]
+
+  log("Installing package #{pkg_name} version: #{pkg_required_version}")
+
   begin
-    pkg_name = pkg[0]
-    pkg_required_version = pkg[1]
-
-    log("Installing package #{pkg_name} version: #{pkg_required_version}")
-
     yum_package pkg_name do
       flush_cache [:before]
       package_name pkg_name
       version pkg_required_version
       action :install
+      ignore_failure :quiet
     end
   rescue
+    bash 'skip-broken' do
+      code <<-EOH
+        yum install --skip-broken #{pkg_name}-#{pkg_required_version}
+      EOH
+    end
   end
 end
 
