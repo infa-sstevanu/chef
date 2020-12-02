@@ -39,16 +39,14 @@ $vulnerable_packages.each do |pkg|
     pkg_name = pkg[0]
     pkg_required_version = pkg[1]
 
-    log("Installing #{pkg_name} version #{pkg_required_version}")
+    log("Installing package #{pkg_name} version: #{pkg_required_version}")
 
-    <<-DOC
     yum_package pkg_name do
       flush_cache [:before]
       package_name pkg_name
       version pkg_required_version
       action :install
     end
-    DOC
   rescue
   end
 end
