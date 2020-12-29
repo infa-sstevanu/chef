@@ -58,6 +58,7 @@ $vulnerable_packages.each do |pkg|
     bash 'skip-broken' do
       code <<-EOH
         yum install --skip-broken #{pkg_name}-#{pkg_required_version}
+        yum update --skip-broken #{pkg_name} -y
       EOH
     end
   end
