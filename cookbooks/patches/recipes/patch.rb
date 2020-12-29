@@ -48,10 +48,17 @@ $vulnerable_packages.each do |pkg|
       action :install
       ignore_failure :quiet
     end
+    yum_package pkg_name do
+      flush_cache [:before]
+      package_name pkg_name
+      action :upgrade
+      ignore_failure :quiet
+    end
   rescue
     bash 'skip-broken' do
       code <<-EOH
         yum install --skip-broken #{pkg_name}-#{pkg_required_version}
+        yum update --skip-broken #{pkg_name} -y
       EOH
     end
   end
